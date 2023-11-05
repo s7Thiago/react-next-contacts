@@ -28,10 +28,7 @@ export const CustomButton = ({ content, onClick, className }: CustomButtonProps)
                focus:ring-4
                rounded-full
                text-lg
-               px-5
                py-2.5
-               mr-2
-               mb-2
                ring-0
              text-button-on-text-no-focus
              bg-button-on-background
