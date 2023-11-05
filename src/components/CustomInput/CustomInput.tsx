@@ -9,7 +9,7 @@ type CustomInputProps = {
     label: string;
     value?: string | "";
     mask?: InputMask | InputMask.CPF;
-    onEdit?: (e: string) => void;
+    onEdit?: (maskFeedbackEvent: MaskFeedback) => void;
     className?: string;
 };
 
@@ -96,20 +96,20 @@ export const CustomInput = (props: CustomInputProps) => {
                 autoComplete="one-time-code"
                 onChange={(e) => {
                     // Apply the input mask on input content
-                    const masked = doMasked(e.target.value, props.mask ?? InputMask.NONE);
+                    const feedback = doMasked(e.target.value, props.mask ?? InputMask.NONE);
 
                     lastValue = e.target.value; // Registra o último valor do campo a cada edição
-                    setInputValue(masked.processedValue)
-                    e.target.value = masked.processedValue;
+                    setInputValue(feedback.processedValue)
+                    e.target.value = feedback.processedValue;
 
-                    if (!masked.isValid) {
+                    if (!feedback.isValid) {
                         updateHasError(true);
-                        setErrorMessage(masked.errorMessage!)
+                        setErrorMessage(feedback.errorMessage!)
                     }
                     else updateHasError(false);
 
                     if (props.onEdit) {
-                        props.onEdit(e.target.value);
+                        props.onEdit(feedback);
                     }
                 }}
                 onFocus={handleInputFocus}

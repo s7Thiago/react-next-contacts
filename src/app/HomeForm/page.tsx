@@ -3,52 +3,68 @@
 import { Button, CustomInput } from '@/components/Index';
 import { Contact } from '@/models/Contact';
 import { InputMask } from '@/models/InputMask';
+import { MaskFeedback } from '@/utils/mask';
 import React, { useState } from 'react';
 
 export const HomeForm = () => {
 
     const [newContact, updateNewContact] = useState({} as Contact);
+    const [hasError, notifyError] = useState(false);
+
+    const updateHasError = (feedback: MaskFeedback) => {
+        if(feedback.isValid) notifyError(false);
+        else notifyError(true);
+    }
 
     // Permite recuperar o valor do campo Nome no escopo da tela HomeForm
-    const handleNome = (value: string) => {
+    const handleNome = (maskFeedbackEvent: MaskFeedback) => {
 
         updateNewContact({
             ...newContact,
-            name: value
+            name: maskFeedbackEvent.processedValue
         });
 
-        return value;
+        updateHasError(maskFeedbackEvent);
+
+        return maskFeedbackEvent.processedValue;
     };
 
     // Permite recuperar o valor do campo E-mail no escopo da tela HomeForm
-    const handleEmail = (value: string) => {
+    const handleEmail = (maskFeedbackEvent: MaskFeedback) => {
         updateNewContact({
             ...newContact,
-            email: value
+            email: maskFeedbackEvent.processedValue
         });
-        return value;
+
+        updateHasError(maskFeedbackEvent);
+
+        return maskFeedbackEvent.processedValue;
     };
 
     // Permite recuperar o valor do campo CPF no escopo da tela HomeForm
-    const handleCpf = (value: string) => {
+    const handleCpf = (maskFeedbackEvent: MaskFeedback) => {
 
         updateNewContact({
             ...newContact,
-            cpf: value
+            cpf: maskFeedbackEvent.processedValue
         });
 
-        return value;
+        updateHasError(maskFeedbackEvent);
+
+        return maskFeedbackEvent.processedValue;
     };
 
     // Permite recuperar o valor do campo Telefone no escopo da tela HomeForm
-    const handleTelefone = (value: string) => {
+    const handleTelefone = (maskFeedbackEvent: MaskFeedback) => {
 
         updateNewContact({
             ...newContact,
-            phone: value
+            phone: maskFeedbackEvent.processedValue
         });
 
-        return value;
+        updateHasError(maskFeedbackEvent);
+
+        return maskFeedbackEvent.processedValue;
     };
 
     //
@@ -56,6 +72,8 @@ export const HomeForm = () => {
         alert('A name was submitted: ' + event.target.value);
 
     }
+
+    console.table(newContact);
 
     return (
         <div className='flex justify-between'>
@@ -93,6 +111,8 @@ export const HomeForm = () => {
                 <Button
                     className='mt-16 px-32'
                     content={"Cadastrar"}
+                    isLoading={false}
+                    hasError={hasError}
                 />
 
             </form>

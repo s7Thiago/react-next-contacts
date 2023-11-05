@@ -1,23 +1,15 @@
 import clsx from "clsx";
+import { LoadingSpinner } from "./components/LoadingSpinner";
 
 type CustomButtonProps = {
     content: any;
+    isLoading?: boolean;
+    hasError?: boolean;
     onClick?: () => void;
     className?: string;
 };
 
-export const CustomButton = ({ content, onClick, className }: CustomButtonProps) => {
-    // return (
-    //     <div className={clsx("flex h-14 text-lg font-semibold pt-7 rounded-full transition-all duration-700 hover:opacity-70 text-button-on-text-no-focus bg-button-on-background", {
-
-    //     })}>
-    //         <div className="m-auto w-auto">
-    //             <h2 className="pointer-events-none" >{props.content}</h2>
-    //         </div>
-
-    //     </div>
-    // );
-
+export const CustomButton = ({ hasError = false, isLoading = false, content, onClick, className }: CustomButtonProps) => {
     return (
         <button className={clsx(
             `
@@ -33,8 +25,18 @@ export const CustomButton = ({ content, onClick, className }: CustomButtonProps)
              text-button-on-text-no-focus
              bg-button-on-background
              focus:bg-button-on-background
-               focus:outline-none`, className)}>
-            {content}
+               focus:outline-none
+               ${className}
+               `,
+               {
+                "bg-button-off-background": hasError,
+                "text-button-off-text-no-focus": hasError,
+                "pointer-events-none": hasError,
+               }
+               )}>
+
+            {isLoading ? <LoadingSpinner /> : content}
+
         </button>
     );
 }
