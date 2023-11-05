@@ -9,6 +9,7 @@ export const LoadingSpinner = () => {
                     w-8 h-8
                     mr-2
                     animate-spin
+                    transition-all
                     text-gray-200
                     dark:text-button-on-background
                     fill-white

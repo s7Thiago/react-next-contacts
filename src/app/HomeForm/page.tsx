@@ -1,6 +1,7 @@
 "use client"
 
-import { Button, CustomInput } from '@/components/Index';
+import { CustomCard } from '@/components/CustomCard/CustomCard';
+import { CustomButton, CustomInput } from '@/components/Index';
 import { Contact } from '@/models/Contact';
 import { InputMask } from '@/models/InputMask';
 import { MaskFeedback } from '@/utils/mask';
@@ -10,9 +11,10 @@ export const HomeForm = () => {
 
     const [newContact, updateNewContact] = useState({} as Contact);
     const [hasError, notifyError] = useState(false);
+    const [isLoading, notifyLoading] = useState(false);
 
     const updateHasError = (feedback: MaskFeedback) => {
-        if(feedback.isValid) notifyError(false);
+        if (feedback.isValid) notifyError(false);
         else notifyError(true);
     }
 
@@ -68,16 +70,25 @@ export const HomeForm = () => {
     };
 
     //
-    const handleSubmit = (event: any) => {
-        alert('A name was submitted: ' + event.target.value);
+    const handleSubmit = async (event: any) => {
+        notifyLoading(true);
+
+        // Aguarda 4 segundos e atualiza o estado isLoading para false
+        setTimeout(() => {
+            notifyLoading(false);
+        }, 6000);
 
     }
 
     console.table(newContact);
 
     return (
-        <div className='flex justify-between'>
-            <form action="" onSubmit={handleSubmit}>
+        <CustomCard className='flex justify-between bg-white'>
+            <form
+            action=""
+            onSubmit={handleSubmit}
+            className='flex items-center justify-center flex-col w-full h-full'
+            >
 
                 <CustomInput
                     label='Nome completo (sem abreviações)'
@@ -108,14 +119,13 @@ export const HomeForm = () => {
                     onEdit={handleTelefone}
                 />
 
-                <Button
-                    className='mt-16 px-32'
+                <CustomButton
+                    className='mt-16 px-32 items-center justify-center flex'
                     content={"Cadastrar"}
-                    isLoading={false}
+                    isLoading={isLoading}
                     hasError={hasError}
                 />
-
             </form>
-        </div>
+        </CustomCard>
     );
 };

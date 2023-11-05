@@ -1,2 +1,3 @@
 export { CustomInput } from './CustomInput/CustomInput';
-export { CustomButton as Button } from './Button/CustomButton';
+export { CustomButton } from './Button/CustomButton';
+export { List } from './List/List';

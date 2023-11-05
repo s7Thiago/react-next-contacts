@@ -129,7 +129,7 @@ export const CustomInput = (props: CustomInputProps) => {
                 `transition-all duration-500 text-input-invalid-font float-left font-semibold text-xs`,
                 {
                 "translate-x-1/2": !hasError,
-                "translate-y-0": !hasError,
+                "translate-y-3": !hasError,
                 "opacity-0": !hasError,
                 "opacity-100": hasError,
                 "pt-4": isFocused || inputValue, // Define um preenchimento inferior quando o campo está em foco ou contém texto

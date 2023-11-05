@@ -15,10 +15,11 @@ export const CustomButton = ({ hasError = false, isLoading = false, content, onC
             `
                mt-16
                font-semibold
-               transition-all duration-700
+               transition-all
+               duration-700
                hover:opacity-70
-               focus:ring-4
                rounded-full
+               focus:ring-0
                text-lg
                py-2.5
                ring-0
@@ -33,7 +34,7 @@ export const CustomButton = ({ hasError = false, isLoading = false, content, onC
                 "text-button-off-text-no-focus": hasError,
                 "pointer-events-none": hasError,
                }
-               )}>
+               )} onClick={onClick}>
 
             {isLoading ? <LoadingSpinner /> : content}
 
