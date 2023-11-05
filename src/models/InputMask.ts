@@ -1,5 +1,5 @@
 export enum InputMask {
-    CPF = "CPF",
+    CPF = 'CPF',
     CNPJ = "CNPJ",
     PHONE = "PHONE",
     CEP = "CEP",
@@ -8,5 +8,7 @@ export enum InputMask {
     DATETIME = "DATETIME",
     CURRENCY = "CURRENCY",
     PERCENTAGE = "PERCENTAGE",
+    NAME = "NAME",
+    EMAIL = "EMAIL",
     NONE = "NONE",
 }

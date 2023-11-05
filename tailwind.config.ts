@@ -26,11 +26,11 @@ const config: Config = {
         },
         button: {
           on: {
-            'font-no-focus': '#ffffff', // cor da fonte do botão ativo sem foco
+            'text-no-focus': '#ffffff', // cor da fonte do botão ativo sem foco
             'background': '#00c8b3', // cor do background do botão ativo
           },
           off: {
-            'font-no-focus': '#dddcdc', // cor da fonte do botão inativo sem foco
+            'text-no-focus': '#dddcdc', // cor da fonte do botão inativo sem foco
             'background': '#f6f6f6', // cor do background do botão inativo
 
           }

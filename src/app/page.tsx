@@ -1,6 +1,7 @@
 import Image from 'next/image'
-import { HomeForm } from './HomeForm/HomeForm'
+import { HomeForm } from './HomeForm/page'
 import { Animated } from './HomeForm/components/Animated'
+import { Button } from '@/components/Index'
 
 export default function Home() {
   return (
