@@ -81,7 +81,7 @@ export const CustomInput = (props: CustomInputProps) => {
                     border-input-border-no-focus
                     focus:border-input-border
                     focus:text-input-text-with-focus
-                    text-input-text-no-focus
+                    text-gray-400
                     bg-transparent`,
                     {
                         "translate-y-3": isFocused || inputValue, // Define um preenchimento inferior quando o campo está em foco ou contém texto

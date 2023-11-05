@@ -30,9 +30,9 @@ export const CustomButton = ({ hasError = false, isLoading = false, content, onC
                ${className}
                `,
                {
-                "bg-button-off-background": hasError,
-                "text-button-off-text-no-focus": hasError,
-                "pointer-events-none": hasError,
+                   "pointer-events-none": hasError,
+                   "text-[#dddcdc]": hasError,
+                   "bg-[#f6f6f6]": hasError,
                }
                )} onClick={onClick}>
 
