@@ -15,9 +15,10 @@ const config: Config = {
       },
       colors: {
         input: {
-          'font-no-focus': '#efeeed', // cor da fonte sem foco
-          'font-with-focus': '#333333', // cor da fonte com foco
-          'border': '#efeeed', // cor da borda
+          'text-no-focus': '#efeeed', // cor da fonte sem foco
+          'text-with-focus': '#333333', // cor da fonte com foco
+          'border': '#333333', // cor da borda
+          'border-no-focus': '#b5b5b5', // cor da borda
           invalid: {
             'font': '#eb4a46', // cor da fonte quando o input é inválido
             'border': '#eb4a46', // cor da borda quando o input é inválido
