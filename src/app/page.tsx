@@ -39,6 +39,7 @@ export default function Home() {
       transition-all
       duration-500
       min-h-screen
+      overflow-hidden
       flex-row
       pt-10
       items-start
@@ -50,7 +51,7 @@ export default function Home() {
       ml-[25%]
       ${editingStyle}
       `, {
-        "-ml-[500px]": selectedContact.id
+        "-ml-[10px]": selectedContact.id
       })} contactsState={contactState} />
 
       <List className={editingStyle} contactsState={contactState} selectedContactState={selectedContactState} />

@@ -138,7 +138,7 @@ export const EditForm = ({ className, selectedContactState, contactsState }: Edi
             z-50
             `, {
                 "opacity-0": !contact.id,
-                "translate-x-[-150px]": !contact.id,
+                "-translate-x-[50px]": !contact.id,
                 "translate-y-[-550px]": !contact.id,
             })} >
                 <h1><strong>Dados Atuais</strong></h1>
