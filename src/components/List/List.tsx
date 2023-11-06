@@ -3,8 +3,7 @@ import { Contact } from "@/models/Contact";
 import { ContactLocalStorageRepository } from "@/repository/ContactLocalStorageRepository";
 import clsx from "clsx";
 import { useEffect, useState } from "react";
-import { LoadingSpinner } from "../Button/components/LoadingSpinner";
-import { CustomCard, ListItem } from "../Index";
+import { CustomCard, ListItem, LoadingSpinner } from "../Index";
 import { v4 as uuidv4 } from 'uuid';
 
 
