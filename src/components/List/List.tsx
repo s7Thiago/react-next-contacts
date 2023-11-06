@@ -42,9 +42,6 @@ export const List = ({ contactsState, selectedContactState, className }: ListPro
 
             // Setando os ids como o nome + email + cpf
             data.forEach((contact: Contact) => {
-                // pega o timestamp atual
-                const timestamp = new Date().getTime();
-
                 // gera um UUID-v4
                 contact.id = uuidv4();
 

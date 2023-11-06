@@ -22,7 +22,7 @@ export default function Home() {
     updateSelectedContact
   }
 
-  let editingStyle = clsx(`
+  const editingStyle = clsx(`
     transition-all duration-500
     bg-gray-400
     opacity-100

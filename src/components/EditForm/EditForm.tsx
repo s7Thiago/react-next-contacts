@@ -1,14 +1,13 @@
-import { type } from "os";
-import { CustomButton, CustomCard, CustomInput } from "../Index";
 import { Contact } from "@/models/Contact";
-import clsx from "clsx";
+import { InputMask } from "@/models/InputMask";
+import { ContactLocalStorageRepository } from "@/repository/ContactLocalStorageRepository";
+import { MaskFeedback } from "@/utils/mask";
 import { faClose } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { ContactLocalStorageRepository } from "@/repository/ContactLocalStorageRepository";
-import { IcoButton } from "../List/components/ListItem/components/IconButton";
+import clsx from "clsx";
 import { useState } from "react";
-import { MaskFeedback } from "@/utils/mask";
-import { InputMask } from "@/models/InputMask";
+import { CustomButton, CustomCard, CustomInput } from "../Index";
+import { IcoButton } from "../List/components/ListItem/components/IconButton";
 
 export type EditFormProps = {
     className?: string;
