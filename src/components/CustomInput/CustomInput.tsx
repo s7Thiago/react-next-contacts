@@ -33,7 +33,7 @@ export const CustomInput = (props: CustomInputProps) => {
         // Se o usuário está apagando o conteúdo do campo, desfaz a máscara e
         // retorna o valor atual conforme a digitação
         // remove os espaços e todos os caracteres .()- do valor atual
-        if (value.length < lastValue.length) {
+        if (value.length < (lastValue??'').length) {
             return {
                 processedValue: value = value.replace(/\s/g, '').replace(/\.|\(|\)|-/g, ''),
                 isValid: getMask(mask)(value, lastValue).isValid ?? false,
@@ -84,12 +84,12 @@ export const CustomInput = (props: CustomInputProps) => {
                     text-gray-400
                     bg-transparent`,
                     {
-                        "translate-y-3": isFocused || inputValue, // Define um preenchimento inferior quando o campo está em foco ou contém texto
-                        "pb-3": isFocused || inputValue,
+                        "translate-y-3": isFocused || inputValue || props.value, // Define um preenchimento inferior quando o campo está em foco ou contém texto
+                        "pb-[1.5px] pt-3": isFocused || inputValue || props.value,
                         "border-input-invalid-border": hasError || ((isFocused || inputValue) && hasError),
                     }
                 )}
-                name={props.value}
+                name={props.name}
                 placeholder=""
                 value={inputValue}
                 maxLength={getInputMaxLength()}
@@ -117,7 +117,7 @@ export const CustomInput = (props: CustomInputProps) => {
             />
             <label
                 className={clsx("absolute focus:top-4 transition-all pointer-events-none", {
-                    "text-xs text-gray-400": isFocused || inputValue, // Mova o rótulo para cima quando o campo está em foco ou contém texto
+                    "text-xs text-gray-400": isFocused || inputValue || props.value, // Mova o rótulo para cima quando o campo está em foco ou contém texto
                     "text-base text-gray-600": !isFocused && !inputValue,
                     "pt-0": isFocused || inputValue, // Define um preenchimento inferior quando o campo está em foco ou contém texto
                 })}

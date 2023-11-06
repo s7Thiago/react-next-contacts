@@ -6,15 +6,17 @@ import { InputMask } from '@/models/InputMask';
 import { ContactLocalStorageRepository } from '@/repository/ContactLocalStorageRepository';
 import { MaskFeedback } from '@/utils/mask';
 import clsx from 'clsx';
-import React, { useState } from 'react';
+import { useState } from 'react';
 
 export type HomeFormProps = {
-    contacts: Contact[];
-    updateContacts: (contacts: Contact[]) => void;
+    contactsState: {
+        contacts: Contact[];
+        updateContacts: (contacts: Contact[]) => void;
+    };
     className?: string;
 };
 
-export const HomeForm = ({contacts, updateContacts} : HomeFormProps) => {
+export const HomeForm = ({ contactsState, className, }: HomeFormProps) => {
 
     const repository = ContactLocalStorageRepository.INSTANCE;
 
@@ -82,42 +84,44 @@ export const HomeForm = ({contacts, updateContacts} : HomeFormProps) => {
     const handleSubmit = async (event: any) => {
         notifyLoading(true);
 
-        // Aguarda 4 segundos e atualiza o estado isLoading para false
+        // Aguarda 1.5s e atualiza o estado isLoading para false
         setTimeout(() => {
             notifyLoading(false);
-        }, 1000);
+        }, 1500);
 
         event.preventDefault();
+
         repository.createContact(newContact);
 
         repository.getContacts().then((contacts) => {
-            updateContacts(contacts);
+            contactsState.updateContacts(contacts);
         });
-
     }
 
-    console.table(newContact);
+    // aguarda 1 segundo, e prossegue
+    setTimeout(() => {
+        // Se o modo for UPDATE, atualiza o estado do contato selecionado
+    }, 1000);
 
     return (
         <CustomCard className={clsx(
-            `flex justify-between bg-white`,
+            `flex justify-between bg-white ${className}`,
             {
-            "z-50": true,
-            "transition-all": true,
-            //"translate-x-[500px]": true
+                "z-50": true,
+                "transition-all": true,
+                //"translate-x-[500px]": true
             }
         )}>
             <form
-            action=""
-            onSubmit={handleSubmit}
-            className='flex items-center justify-center flex-col w-full h-full'
+                action=""
+                onSubmit={handleSubmit}
+                className='flex items-center justify-center flex-col w-full h-full'
             >
 
                 <CustomInput
                     label='Nome completo (sem abreviações)'
                     name='nome'
                     mask={InputMask.NAME}
-                    value='Testando'
                     onEdit={handleNome}
                 />
 

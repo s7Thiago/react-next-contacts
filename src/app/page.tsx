@@ -1,12 +1,25 @@
 "use client"
-import { List } from '@/components/Index'
-import { HomeForm } from './HomeForm/page'
-import { useState } from 'react';
+import { List } from '@/components/Index';
 import { Contact } from '@/models/Contact';
+import { useState } from 'react';
+import { HomeForm } from './HomeForm/page';
 
 export default function Home() {
 
   const [contacts, updateContacts] = useState([] as Contact[]);
+  const [selectedContact, updateSelectedContact] = useState({} as Contact);
+
+  // Estado global da lista de contatos que é compartilhado entre os componentes mais abaixo
+  const contactState = {
+    contacts,
+    updateContacts
+  }
+
+  // Estado global do contato selecionado pode ser compartilhado entre os componentes mais abaixo
+  const selectedContactState = {
+    selectedContact,
+    updateSelectedContact
+  }
 
   return (
     <main className={`
@@ -21,8 +34,8 @@ export default function Home() {
       bg-[#f4f4f4]
     `}>
 
-      <HomeForm contacts={contacts} updateContacts={updateContacts}/>
-      <List contacts={contacts} updateContacts={updateContacts} />
+      <HomeForm contactsState={contactState} />
+      <List contactsState={contactState} selectedContactState={selectedContactState} />
 
     </main>
   )

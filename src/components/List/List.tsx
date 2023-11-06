@@ -1,17 +1,26 @@
 "use client"
 import { Contact } from "@/models/Contact";
+import { ContactLocalStorageRepository } from "@/repository/ContactLocalStorageRepository";
+import clsx from "clsx";
 import { useEffect, useState } from "react";
 import { LoadingSpinner } from "../Button/components/LoadingSpinner";
 import { CustomCard, ListItem } from "../Index";
-import { ContactLocalStorageRepository } from "@/repository/ContactLocalStorageRepository";
+import {v4 as uuidv4} from 'uuid';
 
 
 export type ListProps = {
-    contacts: Contact[];
-    updateContacts: (contacts: Contact[]) => void;
+    contactsState: {
+        contacts: Contact[];
+        updateContacts: (contacts: Contact[]) => void;
+    };
+    selectedContactState: {
+        selectedContact: Contact;
+        updateSelectedContact: (contact: Contact) => void;
+
+    }
 };
 
-export const List = ({contacts, updateContacts} : ListProps) => {
+export const List = ({ contactsState, selectedContactState }: ListProps) => {
 
     const repository = ContactLocalStorageRepository.INSTANCE;
 
@@ -33,13 +42,18 @@ export const List = ({contacts, updateContacts} : ListProps) => {
 
             // Setando os ids como o nome + email + cpf
             data.forEach((contact: Contact) => {
-                contact.id = "ID:" + contact.name + contact.email + contact.cpf;
+                // pega o timestamp atual
+                const timestamp = new Date().getTime();
+
+                // gera um UUID-v4
+                contact.id = uuidv4();
+
                 // Adiciona no repositório local
                 repository.createContact(contact);
             });
 
             repository.getContacts().then((contacts) => {
-                updateContacts(contacts);
+                contactsState.updateContacts(contacts);
             });
 
             notifyLoading(false);
@@ -51,14 +65,25 @@ export const List = ({contacts, updateContacts} : ListProps) => {
 
     return (
         <CustomCard
-            className={`
+            className={clsx(`
                 transition-all
+                duration-700
+                delay-200
                 w-[500px]
-                h-auto
+                h-50
                 bg-black
                 bg-white
                 text-black
-        `}>
+        `, {
+                "h-auto": isLoading,
+                "animate-pulse": isLoading
+            })}>
+
+            {
+                (contactsState.contacts.length <= 0)  && !isLoading ?
+                <h2 className="text-gray-300 select-none" >Não há nenhum registro...</h2> :
+                null
+            }
 
             {isLoading ?
 
@@ -69,22 +94,24 @@ export const List = ({contacts, updateContacts} : ListProps) => {
                 </div>
                 :
 
-                <div>
-                    {contacts.map((contact) => {
+                <div className={clsx(`
+                transition-all duration-700
+                `, {})}>
+                    {contactsState.contacts.map((contact) => {
                         return (
                             <div key={contact.id}>
                                 <ListItem
                                     contact={contact}
-                                    index={contacts.indexOf(contact)}
-                                    totalItems={contacts.length}
+                                    contactsState={contactsState}
+                                    totalItems={contactsState.contacts.length}
+                                    selectedContactState={selectedContactState}
+                                    index={contactsState.contacts.indexOf(contact)}
                                 />
                             </div>
                         )
                     })}
                 </div>
-
             }
-
         </CustomCard>
     );
 }
