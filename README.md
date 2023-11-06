@@ -1,36 +1,48 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Sanity + Next.js frontend example
 
-## Getting Started
+DEMO 👉 https://example-frontend-next-js.sanity-io.now.sh
 
-First, run the development server:
+This is an example [Sanity](https://www.sanity.io/) powered frontend for the movie dataset using [Next.js](https://github.com/zeit/next.js/).
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+## Prerequisites
+
+You will need [Node.js](https://nodejs.org) version 8.0 or greater installed on your system.
+
+## Setup
+
+Get the code by either cloning this repository using git
+
+```
+git clone https://github.com/sanity-io/example-frontend-next-js.git
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+... or [downloading source code](https://github.com/sanity-io/example-frontend-next-js/archive/master.zip) code as a zip archive.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Once downloaded, open the terminal in the project directory, and install dependencies with:
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+```
+npm install
+```
 
-## Learn More
+If you're running your own Sanity project with the example movie dataset, go to `lib/sanity.js` and change the following lines:
 
-To learn more about Next.js, take a look at the following resources:
+```
+  projectId: 'YOUR_PROJECT_ID',
+  dataset: 'NAME_OF_YOUR_DATASET',
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+You can locate the ID of your project in the header of the [management page for your project](https://manage.sanity.io/).
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+You also need to enable `localhost:3000` in your CORS Origins settings! Either through the [management page](https://manage.sanity.io/) under `settings` or by running the below in the project folder you set up with `sanity init`:
 
-## Deploy on Vercel
+```
+sanity cors add http://localhost:3000
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Then start the example app with:
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+```
+npm run dev
+```
+
+The app should now be up and running at http://localhost:3000 🚀
