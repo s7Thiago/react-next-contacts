@@ -1,4 +1,4 @@
-# Sanity + Next.js frontend example
+# ReactJs + Next.js + TailwindCss frontend app
 
 DEMO 👇
 
