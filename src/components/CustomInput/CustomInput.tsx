@@ -1,6 +1,6 @@
 "use client"
 import { InputMask } from "@/models/InputMask";
-import { MaskFeedback, cpfMask, getMask, phoneMask } from "@/utils/mask";
+import { MaskFeedback, getMask } from "@/utils/mask";
 import clsx from "clsx";
 import { useState } from "react";
 
@@ -14,7 +14,7 @@ type CustomInputProps = {
 };
 
 export const CustomInput = (props: CustomInputProps) => {
-    const [inputValue, setInputValue] = useState("");
+    const [inputValue, setInputValue] = useState(props.value ?? "");
     const [isFocused, setIsFocused] = useState(false);
     const [hasError, updateHasError] = useState(false);
     const [errorMessage, setErrorMessage] = useState("");
@@ -33,7 +33,7 @@ export const CustomInput = (props: CustomInputProps) => {
         // Se o usuário está apagando o conteúdo do campo, desfaz a máscara e
         // retorna o valor atual conforme a digitação
         // remove os espaços e todos os caracteres .()- do valor atual
-        if (value.length < (lastValue??'').length) {
+        if (value.length < (lastValue ?? '').length) {
             return {
                 processedValue: value = value.replace(/\s/g, '').replace(/\.|\(|\)|-/g, ''),
                 isValid: getMask(mask)(value, lastValue).isValid ?? false,
@@ -128,15 +128,14 @@ export const CustomInput = (props: CustomInputProps) => {
             <p className={clsx(
                 `transition-all duration-500 text-input-invalid-font float-left font-semibold text-xs`,
                 {
-                "translate-x-1/2": !hasError,
-                "translate-y-3": !hasError,
-                "opacity-0": !hasError,
-                "opacity-100": hasError,
-                "pt-4": isFocused || inputValue, // Define um preenchimento inferior quando o campo está em foco ou contém texto
-                //"hidden": !hasError,
+                    "translate-x-1/2": !hasError,
+                    "translate-y-3": !hasError,
+                    "opacity-0": !hasError,
+                    "opacity-100": hasError,
+                    "pt-4": isFocused || inputValue, // Define um preenchimento inferior quando o campo está em foco ou contém texto
+                    //"hidden": !hasError,
 
-            })}>{errorMessage}</p>
-
+                })}>{errorMessage}</p>
         </div>
     );
 };

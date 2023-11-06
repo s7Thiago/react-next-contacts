@@ -107,17 +107,20 @@ export const HomeForm = ({ contactsState, className, }: HomeFormProps) => {
         <CustomCard className={clsx(
             `flex justify-between bg-white ${className}`,
             {
-                "z-50": true,
                 "transition-all": true,
-                //"translate-x-[500px]": true
             }
         )}>
+
+
             <form
                 action=""
                 onSubmit={handleSubmit}
                 className='flex items-center justify-center flex-col w-full h-full'
             >
 
+            <h1
+            className='text-sm font-bold text-gray-500'
+            >Preencha o formulário para cadastrar</h1>
                 <CustomInput
                     label='Nome completo (sem abreviações)'
                     name='nome'

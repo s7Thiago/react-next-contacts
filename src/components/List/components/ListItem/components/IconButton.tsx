@@ -11,7 +11,6 @@ export const IcoButton = ({ icon, onClick, className }: IcoButtonProps) => {
     return (
         <button className={clsx(`
             rounded-xl
-            focus:
             focus:outline-none
             focus:ring-0
             hover:opacity-70

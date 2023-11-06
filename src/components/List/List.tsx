@@ -5,10 +5,11 @@ import clsx from "clsx";
 import { useEffect, useState } from "react";
 import { LoadingSpinner } from "../Button/components/LoadingSpinner";
 import { CustomCard, ListItem } from "../Index";
-import {v4 as uuidv4} from 'uuid';
+import { v4 as uuidv4 } from 'uuid';
 
 
 export type ListProps = {
+    className?: string;
     contactsState: {
         contacts: Contact[];
         updateContacts: (contacts: Contact[]) => void;
@@ -20,7 +21,7 @@ export type ListProps = {
     }
 };
 
-export const List = ({ contactsState, selectedContactState }: ListProps) => {
+export const List = ({ contactsState, selectedContactState, className }: ListProps) => {
 
     const repository = ContactLocalStorageRepository.INSTANCE;
 
@@ -71,18 +72,24 @@ export const List = ({ contactsState, selectedContactState }: ListProps) => {
                 delay-200
                 w-[500px]
                 h-50
-                bg-black
                 bg-white
                 text-black
+                ${className}
         `, {
                 "h-auto": isLoading,
                 "animate-pulse": isLoading
             })}>
 
+<h1
+            className='text-sm font-bold text-gray-500'
+            >Cadastrados</h1>
+
+            <br />
+
             {
-                (contactsState.contacts.length <= 0)  && !isLoading ?
-                <h2 className="text-gray-300 select-none" >Não há nenhum registro...</h2> :
-                null
+                (contactsState.contacts.length <= 0) && !isLoading ?
+                    <h2 className="text-gray-300 select-none" >Não há nenhum registro...</h2> :
+                    null
             }
 
             {isLoading ?

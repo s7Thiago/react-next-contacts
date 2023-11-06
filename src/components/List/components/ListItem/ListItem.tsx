@@ -38,9 +38,6 @@ export const ListItem = ({
             gap-4
             `, {})}>
 
-            {/* <div className="w-10 h-10 rounded-full bg-gray-400"></div> */}
-
-
             <div className="pr-10 flex">
 
                 <div className="bg-transparent">
@@ -64,22 +61,16 @@ export const ListItem = ({
 
                 <div className="flex gap-4">
 
+                    {/* Botão editar */}
                     <IcoButton
                         icon={<FontAwesomeIcon icon={faPen} />}
                         onClick={() => {
-
-                            if(selectedContactState.selectedContact.id){
-                                selectedContactState.updateSelectedContact({} as Contact);
-                                setTimeout(() => {}, 90);
-                                selectedContactState.updateSelectedContact(contact);
-                            } else {
-                                selectedContactState.updateSelectedContact(contact);
-                                setTimeout(() => {}, 90);
-                            }
-
+                            setTimeout(() => { }, 150);
+                            selectedContactState.updateSelectedContact(contact);
                         }}
                     />
 
+                    {/* Botão deletar */}
                     <IcoButton
                         className="bg-input-invalid-border"
                         icon={<FontAwesomeIcon icon={faTrashCan} />}
